@@ -26,16 +26,17 @@ export class TableService {
       row.addEventListener("click", () => {
         let pokemon: Pokemon | any = this.pokemonsList[index.toString()];
         this.fetchService.fetchPokemons(pokemon.url).then((res) => {
-            let sprites = [
-              res.sprites.front_default,
-              res.sprites.back_default,
-              res.sprites.front_shiny,
-              res.sprites.back_shiny
-            ];
+
+          let sprites = [
+            res.sprites.front_default,
+            res.sprites.back_default,
+            res.sprites.front_shiny,
+            res.sprites.back_shiny
+          ];
             
-            sprites.forEach((element:any, index:number) => {
-              this.fetchService.fetchPokemonImg(this.domService.images![index], element)
-            })
+          sprites.forEach((element:any, index:number) => {
+            this.fetchService.fetchPokemonImg(this.domService.images![index], element)
+          })
 
           this.domService.title!.innerHTML = capitalizeFirstLetter(pokemon.name);
 
