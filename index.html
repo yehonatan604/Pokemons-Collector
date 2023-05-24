@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemons Collector</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="top">
+        <div id="top-header">
+          <h1 id="pokemon-title">Pokemon</h1>
+        </div>
+        <div id="pokemon-details">
+          <div id="abilities">
+            <h1>Abilities:</h1>
+            <p id="abilities-text"></p>
+          </div>
+          <div id="height">
+            <h1>Height:</h1>
+            <p id="height-text"></p>
+          </div>
+          <div id="experience">
+            <h1>Experience:</h1>
+            <p id="experience-text"></p>
+            <button>save</button>
+          </div>
+        </div>
+      </div>
+      <div id="bottom">
+        <table id="pokemonsTable"></table>
+        <div id="images">
+          <img id="pokemonImg-front" />
+          <img id="pokemonImg-back" />
+          <img id="pokemonImg-front-shiny" />
+          <img id="pokemonImg-back-shiny" />
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
