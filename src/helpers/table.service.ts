@@ -4,14 +4,18 @@ import { fillSprites } from "../utilities/fill-sprites";
 import { reduceAbilities } from "../utilities/reduce-abilities";
 import { DomService } from "./dom.service";
 import { FetchService } from "./fetch.service";
+import { LocalStorageService } from "./local-storage.service";
 
 export class TableService {
   constructor(
     private fetchService: FetchService,
-    private domService: DomService
+    private domService: DomService,
+    private localStorageService: LocalStorageService
   ) {}
 
   pokemonsList: any;
+  storageList: any;
+
   fillTable(pokemonsList: any) {
     this.pokemonsList = pokemonsList;
     for (let item of pokemonsList) {
@@ -22,16 +26,38 @@ export class TableService {
         cell.appendChild(text);
       }
     }
-    this.handleRows();
+    
+    this.handleRows(document.querySelectorAll("#pokemonsTable tr"));
   }
 
-  handleRows() {
-    const rows = document.querySelectorAll("#pokemonsTable tr");
+  fillLocalTable() {
+    this.domService.localStorageTable!.innerHTML = "";
+
+    for (let item of Object.entries(localStorage)) {
+      let row = this.domService.localStorageTable!.insertRow();
+      for (let key in item) {
+        let cell = row.insertCell();
+        let text = document.createTextNode(item[key]);
+        cell.appendChild(text);
+      }
+    }
+
+    this.handleRows(document.querySelectorAll("#localStorageTable tr"));
+  }
+  
+  handleRows(rows: NodeListOf<HTMLTableRowElement>) {
     rows.forEach((row, index) =>
-      row.addEventListener("click", () => {
-        let pokemon: Pokemon | any = this.pokemonsList[index.toString()];
+    row.addEventListener("click", () => {
+      let pokemon: Pokemon | any = this.pokemonsList[index.toString()];
         this.fetchService.fetchPokemons(pokemon.url).then((res) => {
+          
+          this.domService.saveButton!.addEventListener("click", () => {
+            this.localStorageService.add(pokemon.name, pokemon.url);
+            this.fillLocalTable();
+          });
+
           fillSprites(res.sprites, this.fetchService, this.domService);
+
           this.domService.fillDetails(
             capitalizeFirstLetter(pokemon.name),
             reduceAbilities(res.abilities),

@@ -1,6 +1,8 @@
 export class DomService {
   pokemonsTable = document.querySelector<HTMLTableElement>("#pokemonsTable");
+  localStorageTable = document.querySelector<HTMLTableElement>("#localStorageTable");
   title = document.querySelector<HTMLTitleElement>("#pokemon-title");
+  saveButton = document.querySelector<HTMLButtonElement>("#save-button");
 
   images = [
     document.querySelector<HTMLImageElement>("#pokemonImg-front"),

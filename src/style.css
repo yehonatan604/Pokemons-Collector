@@ -1,3 +1,16 @@
+body {
+  background-color: rgb(228, 219, 228);
+}
+
+p {
+  font-size: 22px;
+}
+
+img {
+  height: 150px;
+  width: auto;
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -46,11 +59,13 @@
   align-items: center;
 }
 
-body {
-  background-color: rgb(228, 219, 228);
+.tableDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
-#pokemonsTable {
+#pokemonsTable, #localStorageTable {
   display: flex;
   height: 47vh;
   overflow-y: auto;
@@ -58,12 +73,8 @@ body {
   direction: rtl;
 }
 
-p {
-  font-size: 22px;
-}
-img {
-  height: 150px;
-  width: auto;
+#localStorageTable {
+  direction: ltr;
 }
 
 td {
