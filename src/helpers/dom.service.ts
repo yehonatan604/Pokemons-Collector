@@ -14,4 +14,11 @@ export class DomService {
     document.querySelector<HTMLParagraphElement>("#height-text"),
     document.querySelector<HTMLParagraphElement>("#experience-text"),
   ];
+
+  fillDetails(title: string, abilities: any, height: number, experience: number) {
+    this.title!.innerHTML = title;
+    this.details[0]!.innerHTML = abilities;
+    this.details[1]!.innerHTML = ""+height;
+    this.details[2]!.innerHTML = ""+experience;
+  }
 }
