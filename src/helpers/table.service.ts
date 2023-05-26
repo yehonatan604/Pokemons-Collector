@@ -1,5 +1,6 @@
 import { Pokemon } from "../models/pokemon.model";
-import { capitalizeFirstLetter } from "./capitalize-first-letter";
+import { capitalizeFirstLetter } from "../utilities/capitalize-first-letter";
+import { reduceAbilities } from "../utilities/reduce-abilities";
 import { DomService } from "./dom.service";
 import { FetchService } from "./fetch.service";
 
@@ -39,13 +40,7 @@ export class TableService {
           })
 
           this.domService.title!.innerHTML = capitalizeFirstLetter(pokemon.name);
-
-          let abilities: string = res.abilities.reduce(
-            (prev: any, curr: any) => {
-              return prev + `${capitalizeFirstLetter(curr.ability.name)} | `;
-            }, "");
-
-          this.domService.details![0]!.innerHTML = abilities!;
+          this.domService.details![0]!.innerHTML = reduceAbilities(res.abilities)!;
           this.domService.details![1]!.innerHTML = res.height;
           this.domService.details![2]!.innerHTML = res.base_experience;
         });
