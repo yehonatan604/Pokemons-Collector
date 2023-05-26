@@ -15,10 +15,10 @@ export class DomService {
     document.querySelector<HTMLParagraphElement>("#experience-text"),
   ];
 
-  fillDetails(title: string, abilities: any, height: number, experience: number) {
+  fillDetails(title: string, abilities: any, height: string, experience: string) {
     this.title!.innerHTML = title;
     this.details[0]!.innerHTML = abilities;
-    this.details[1]!.innerHTML = ""+height;
-    this.details[2]!.innerHTML = ""+experience;
+    this.details[1]!.innerHTML = height;
+    this.details[2]!.innerHTML = experience;
   }
 }

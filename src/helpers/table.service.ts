@@ -34,7 +34,7 @@ export class TableService {
           fillSprites(res.sprites, this.fetchService, this.domService);
           this.domService.fillDetails(
             capitalizeFirstLetter(pokemon.name),
-            reduceAbilities(res.abilities)!,
+            reduceAbilities(res.abilities),
             res.height,
             res.base_experience
           );
