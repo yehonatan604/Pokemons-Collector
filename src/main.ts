@@ -1,9 +1,9 @@
 import "./style.css";
-import { DomService } from "./helpers/dom.service";
-import { FetchService } from "./helpers/fetch.service";
-import { PokemonsListService } from "./helpers/pokemons-list.service";
-import { TableService } from "./helpers/table.service";
-import { LocalStorageService } from "./helpers/local-storage.service";
+import { DomService } from "./helpers/services/dom.service";
+import { FetchService } from "./helpers/services/fetch.service";
+import { LocalStorageService } from "./helpers/services/local-storage.service";
+import { PokemonsListService } from "./helpers/services/pokemons-list.service";
+import { TableService } from "./helpers/services/table.service";
 
 let domService = new DomService();
 let fetchService = new FetchService();

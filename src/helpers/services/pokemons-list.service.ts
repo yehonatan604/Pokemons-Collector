@@ -1,4 +1,4 @@
-import { Pokemon } from "../models/pokemon.model";
+import { Pokemon } from "../../models/pokemon.model";
 import { FetchService } from "./fetch.service";
 
 export class PokemonsListService {

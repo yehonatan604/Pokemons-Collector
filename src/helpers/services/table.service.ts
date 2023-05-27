@@ -1,10 +1,8 @@
-import { Pokemon } from "../models/pokemon.model";
-import { capitalizeFirstLetter } from "../utilities/capitalize-first-letter";
-import { fillSprites } from "../utilities/fill-sprites";
-import { reduceAbilities } from "../utilities/reduce-abilities";
+import { Pokemon } from "../../models/pokemon.model";
 import { DomService } from "./dom.service";
 import { FetchService } from "./fetch.service";
 import { LocalStorageService } from "./local-storage.service";
+import { capitalizeFirstLetter, fillSprites, reduceAbilities } from "../utilities/utilities";
 
 export class TableService {
   constructor(
