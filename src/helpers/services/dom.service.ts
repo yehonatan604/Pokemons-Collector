@@ -1,9 +1,9 @@
 import { FetchTypes } from "../../models/enums";
-import { FetchService } from "./fetch.service";
+import { PokemonDetails } from "../../models/pokemon-details.model";
+import { Pokemon } from "../../models/pokemon.model";
+import { useFetch } from "../utilities/use-fetch.util";
 
 export class DomService {
-  constructor(private useFetch: FetchService) {}
-
   title = document.querySelector<HTMLTitleElement>("#pokemon-title");
   pokemonsTable = document.querySelector<HTMLTableElement>("#pokemonsTable");
   saveButton = document.querySelector<HTMLButtonElement>("#save-button");
@@ -27,11 +27,17 @@ export class DomService {
     return document.querySelectorAll("#pokemonsTable tr");
   }
 
-  fillDetails(title: string, abilities: any, height: string, experience: string) {
-    this.title!.innerHTML = title;
-    this.details[0]!.innerHTML = abilities;
-    this.details[1]!.innerHTML = height;
-    this.details[2]!.innerHTML = experience;
+  addButtonFunctionality(pokemon: Pokemon) {
+    this.saveButton!.addEventListener("click", () => {
+      localStorage.setItem(pokemon.name, pokemon.url)
+    });
+  }
+
+  fillDetails(details: PokemonDetails) {
+    this.title!.innerHTML = details.title;
+    this.details[0]!.innerHTML = details.abilities;
+    this.details[1]!.innerHTML = details.height;
+    this.details[2]!.innerHTML = details.experience;
   }
 
   fillSprites(sprites: any) {
@@ -42,8 +48,8 @@ export class DomService {
       sprites.back_shiny,
     ];
   
-    spritesList.forEach(async (element: any, index: number) => {
-      let pic = await this.useFetch.fetchPokemons(element, FetchTypes.blob);
+    spritesList.forEach(async (element: string, index: number) => {
+      let pic = await useFetch(element, FetchTypes.blob);
       this.images[index]!.src = URL.createObjectURL(pic);
     });
   }

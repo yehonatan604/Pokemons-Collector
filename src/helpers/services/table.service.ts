@@ -1,11 +1,13 @@
 import { Pokemon } from "../../models/pokemon.model";
 import { DomService } from "./dom.service";
-import { FetchService } from "./fetch.service";
-import { capitalizeFirstLetter, reduceAbilities } from "../utilities/utilities";
+import { reduceAbilities } from "../utilities/reduce-abilities.util";
+import { capitalizeFirstLetter } from "../utilities/capitalize-first-letter.util";
 import { FetchTypes } from "../../models/enums";
+import { useFetch } from "../utilities/use-fetch.util";
+import { PokemonDetails } from "../../models/pokemon-details.model";
 
 export class TableService {
-  constructor(private useFetch: FetchService, private dom: DomService) {}
+  constructor(private dom: DomService) {}
   private pokemonsList!: Pokemon[];
 
   fillTable(pokemonsList: any) {
@@ -23,25 +25,19 @@ export class TableService {
 
   handleRows() {
     this.dom.getTableRows().forEach((row, index) => {
-
-      row.addEventListener("click", () => {
-        let pokemon: Pokemon | any = this.pokemonsList[+index.toString()];
-          this.useFetch.fetchPokemons(pokemon.url, FetchTypes.json).then((res) => {  
-
-            this.dom.fillSprites(res.sprites);
-            this.dom.fillDetails(
-              capitalizeFirstLetter(pokemon.name),
-              reduceAbilities(res.abilities),
-              res.height,
-              res.base_experience
-            );
-            this.dom.saveButton!.addEventListener("click", () => {
-              localStorage.setItem(pokemon.name, pokemon.url)
-            });
-
-          });
+      row.addEventListener("click", async () => {
+        const pokemon: Pokemon | any = this.pokemonsList[+index.toString()];
+        const response = await useFetch(pokemon.url, FetchTypes.json);  
+        const details = new PokemonDetails(
+          capitalizeFirstLetter(pokemon.name),
+          reduceAbilities(response.abilities),
+          response.height,
+          response.base_experience
+        )
+        this.dom.addButtonFunctionality(pokemon);
+        this.dom.fillSprites(response.sprites);
+        this.dom.fillDetails(details);
       });
-      
     });
   }
 }

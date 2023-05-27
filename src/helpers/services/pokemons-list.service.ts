@@ -1,15 +1,13 @@
 import { FetchTypes } from "../../models/enums";
 import { Pokemon } from "../../models/pokemon.model";
-import { FetchService } from "./fetch.service";
+import { useFetch } from "../utilities/use-fetch.util";
 
 export class PokemonsListService {
-  constructor(private useFetch: FetchService) {}
-
   private pokemons: Pokemon[] = [];
   private url: string = "https://pokeapi.co/api/v2/pokemon?limit=200";
 
   async fillPokemonsList() {
-    let response = await this.useFetch.fetchPokemons(this.url, FetchTypes.json);
+    const response = await useFetch(this.url, FetchTypes.json);
     this.pokemons = [...response.results];
   }
 
