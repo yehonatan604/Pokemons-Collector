@@ -1,4 +1,9 @@
+import { FetchTypes } from "../../models/enums";
+import { FetchService } from "./fetch.service";
+
 export class DomService {
+  constructor(private useFetch: FetchService) {}
+
   pokemonsTable = document.querySelector<HTMLTableElement>("#pokemonsTable");
   localStorageTable = document.querySelector<HTMLTableElement>("#localStorageTable");
   title = document.querySelector<HTMLTitleElement>("#pokemon-title");
@@ -17,10 +22,30 @@ export class DomService {
     document.querySelector<HTMLParagraphElement>("#experience-text"),
   ];
 
+  // if we wont put this in a function, it will run before we have table rows. 
+  // we will call it when we'll need it.
+  getTableRows() : NodeListOf<HTMLTableRowElement> {
+    return document.querySelectorAll("#pokemonsTable tr");
+  }
+
   fillDetails(title: string, abilities: any, height: string, experience: string) {
     this.title!.innerHTML = title;
     this.details[0]!.innerHTML = abilities;
     this.details[1]!.innerHTML = height;
     this.details[2]!.innerHTML = experience;
+  }
+
+  fillSprites(sprites: any) {
+    const spritesList = [
+      sprites.front_default,
+      sprites.back_default,
+      sprites.front_shiny,
+      sprites.back_shiny,
+    ];
+  
+    spritesList.forEach(async (element: any, index: number) => {
+      ;
+      this.images[index]!.src = URL.createObjectURL(await this.useFetch.fetchPokemons(element, FetchTypes.blob));
+    });
   }
 }
