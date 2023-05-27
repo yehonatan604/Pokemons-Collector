@@ -15,4 +15,3 @@ await pokemonsListService.getPokemons();
 let pokemons = pokemonsListService.getPokemonsList()[0];
 
 tableService.fillTable(pokemons);
-tableService.fillLocalTable();

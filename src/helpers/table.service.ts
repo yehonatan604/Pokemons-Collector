@@ -30,21 +30,6 @@ export class TableService {
     this.handleRows(document.querySelectorAll("#pokemonsTable tr"));
   }
 
-  fillLocalTable() {
-    this.domService.localStorageTable!.innerHTML = "";
-
-    for (let item of Object.entries(localStorage)) {
-      let row = this.domService.localStorageTable!.insertRow();
-      for (let key in item) {
-        let cell = row.insertCell();
-        let text = document.createTextNode(item[key]);
-        cell.appendChild(text);
-      }
-    }
-
-    this.handleRows(document.querySelectorAll("#localStorageTable tr"));
-  }
-  
   handleRows(rows: NodeListOf<HTMLTableRowElement>) {
     rows.forEach((row, index) =>
     row.addEventListener("click", () => {
@@ -53,7 +38,6 @@ export class TableService {
           
           this.domService.saveButton!.addEventListener("click", () => {
             this.localStorageService.add(pokemon.name, pokemon.url);
-            this.fillLocalTable();
           });
 
           fillSprites(res.sprites, this.fetchService, this.domService);
