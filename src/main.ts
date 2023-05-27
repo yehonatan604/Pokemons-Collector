@@ -10,6 +10,6 @@ let pokemonsListService = new PokemonsListService(fetchService); //3: fetch poke
 let tableService = new TableService(fetchService, domService); //4: render
 
 await pokemonsListService.fillPokemonsList();
-let pokemons = pokemonsListService.getPokemonsList()[0];
+let pokemons = pokemonsListService.getPokemonsList();
 
 tableService.fillTable(pokemons);

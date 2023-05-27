@@ -23,12 +23,11 @@ export class TableService {
 
   handleRows() {
     this.dom.getTableRows().forEach((row, index) => {
+
       row.addEventListener("click", () => {
         let pokemon: Pokemon | any = this.pokemonsList[+index.toString()];
-          this.useFetch.fetchPokemons(pokemon.url, FetchTypes.json).then((res) => {       
-            this.dom.saveButton!.addEventListener("click", () =>
-              localStorage.setItem(pokemon.name, pokemon.url)
-            );
+          this.useFetch.fetchPokemons(pokemon.url, FetchTypes.json).then((res) => {  
+
             this.dom.fillSprites(res.sprites);
             this.dom.fillDetails(
               capitalizeFirstLetter(pokemon.name),
@@ -36,8 +35,13 @@ export class TableService {
               res.height,
               res.base_experience
             );
+            this.dom.saveButton!.addEventListener("click", () => {
+              localStorage.setItem(pokemon.name, pokemon.url)
+            });
+
           });
       });
+      
     });
   }
 }

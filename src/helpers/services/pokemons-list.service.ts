@@ -9,12 +9,8 @@ export class PokemonsListService {
   private url: string = "https://pokeapi.co/api/v2/pokemon?limit=200";
 
   async fillPokemonsList() {
-    let objectEntries = Object.entries(await this.useFetch.fetchPokemons(this.url, FetchTypes.json));
-    for (let [index, [, value]] of objectEntries.entries()) {
-      if (index == 3) {
-        this.pokemons.push(value as Pokemon);
-      }
-    }
+    let response = await this.useFetch.fetchPokemons(this.url, FetchTypes.json);
+    this.pokemons = [...response.results];
   }
 
   getPokemonsList() {

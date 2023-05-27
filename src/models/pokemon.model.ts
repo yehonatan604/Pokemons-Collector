@@ -1,3 +1,10 @@
 export class Pokemon {
-    constructor(public name:string, public url:string) { }
+    constructor(public name:string | any, public url:string | any) { }
 }
+
+/* 
+export type Pokemon = {
+    name: string,
+    url: string
+}
+*/

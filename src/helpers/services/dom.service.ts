@@ -4,9 +4,8 @@ import { FetchService } from "./fetch.service";
 export class DomService {
   constructor(private useFetch: FetchService) {}
 
-  pokemonsTable = document.querySelector<HTMLTableElement>("#pokemonsTable");
-  localStorageTable = document.querySelector<HTMLTableElement>("#localStorageTable");
   title = document.querySelector<HTMLTitleElement>("#pokemon-title");
+  pokemonsTable = document.querySelector<HTMLTableElement>("#pokemonsTable");
   saveButton = document.querySelector<HTMLButtonElement>("#save-button");
 
   images = [
@@ -44,8 +43,8 @@ export class DomService {
     ];
   
     spritesList.forEach(async (element: any, index: number) => {
-      ;
-      this.images[index]!.src = URL.createObjectURL(await this.useFetch.fetchPokemons(element, FetchTypes.blob));
+      let pic = await this.useFetch.fetchPokemons(element, FetchTypes.blob);
+      this.images[index]!.src = URL.createObjectURL(pic);
     });
   }
 }
