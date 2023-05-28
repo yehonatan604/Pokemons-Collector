@@ -1,4 +1,4 @@
-import { FetchTypes } from "../../models/enums";
+import { FetchTypes } from "../../models/fetch-types.enum";
 import { Pokemon } from "../../models/pokemon.model";
 import { useFetch } from "../utilities/use-fetch.util";
 

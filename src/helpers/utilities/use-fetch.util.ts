@@ -1,7 +1,7 @@
-import { FetchTypes } from "../../models/enums";
+import { FetchTypes } from "../../models/fetch-types.enum";
 
 export const useFetch = async (url: string, fetchType: FetchTypes) => {
-    let response = await fetch(url);
+    const response = await fetch(url);
     if (response.status === 200) {
       return fetchType == FetchTypes.json ? await response.json(): await response.blob();
     } else {
