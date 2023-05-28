@@ -11,7 +11,7 @@ export class PokemonsListService {
     this.pokemons = [...response.results];
   }
 
-  getPokemonsList() {
+  getPokemonsList() : Pokemon[] {
     return [...this.pokemons];
   }
 }
