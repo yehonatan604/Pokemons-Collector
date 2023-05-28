@@ -67,13 +67,15 @@ img {
 
 #pokemonsTable {
   display: flex;
-  height: 47vh;
+  height: 39vh;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px;
   direction: rtl;
+
 }
 
-td {
+td, th {
   border: 1px solid gray;
   width: fit-content;
   padding: 4px;
@@ -83,11 +85,21 @@ td {
 
 }
 
+tr:nth-child(1) {
+  background-color: rgb(78, 81, 94);
+  color: rgb(255, 255, 255);
+}
+
 tr:nth-child(even) {
   background-color: rgb(218, 213, 223);
 }
 
 tr:hover {
   background-color: rgb(164, 190, 200);
+  color: black;
   cursor: pointer;
+}
+
+th {
+  background-color: magenta;
 }
