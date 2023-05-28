@@ -44,27 +44,27 @@ export class TableService {
 
   handleRows() {
     this.dom.getTableRows().forEach((row: HTMLTableRowElement, index: number) => {
-        if (index != 0) {
-          row.addEventListener("click", async () => {
-            const pokemon: Pokemon = this.pokemonsList[index-1];
-            const response = await useFetch(pokemon.url, FetchTypes.json);
-            this.dom.addButtonFunctionality(pokemon);
-            this.dom.fillSprites([
-              response.sprites.front_default,
-              response.sprites.back_default,
-              response.sprites.front_shiny,
-              response.sprites.back_shiny,
-            ]);
-            this.dom.fillDetails(
-              new PokemonDetails(
-                capitalizeFirstLetter(pokemon.name),
-                reduceAbilities(response.abilities),
-                response.height,
-                response.base_experience
-              )
-            );
-          });
-        }
-      });
+      if (index != 0) {
+        row.addEventListener("click", async () => {
+          const pokemon: Pokemon = this.pokemonsList[index-1];
+          const response = await useFetch(pokemon.url, FetchTypes.json);
+          this.dom.addButtonFunctionality(pokemon);
+          this.dom.fillSprites([
+            response.sprites.front_default,
+            response.sprites.back_default,
+            response.sprites.front_shiny,
+            response.sprites.back_shiny,
+          ]);
+          this.dom.fillDetails(
+            new PokemonDetails(
+              capitalizeFirstLetter(pokemon.name),
+              reduceAbilities(response.abilities),
+              response.height,
+              response.base_experience
+            )
+          );
+        });
+      }
+    });
   }
 }
